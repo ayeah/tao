@@ -1,5 +1,8 @@
 FROM tutum/lamp:latest
 
+RUN  apt-get update \
+  && apt-get install -y wget
+
 RUN rm -fr /app 
 RUN mkdir /app 
 RUN cd /app 
