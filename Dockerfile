@@ -1,13 +1,15 @@
-FROM tutum/lamp:latest
+FROM centurylink/apache-php:latest
+MAINTAINER ayeah
 
-RUN  apt-get update \
-  && apt-get install -y wget \
-  && apt-get install -y unzip
-  
-RUN cd /app 
-RUN wget http://o6qy1dbfx.bkt.clouddn.com/tao.zip
-RUN unzip tao.zip
+# Install packages
+RUN apt-get update && \
+ apt-get -y install unzip
 
-EXPOSE 80 3306
+# Download Wordpress into /app
+RUN rm -fr /app && mkdir /app && \
+ curl -L -O http://o6qy1dbfx.bkt.clouddn.com/tao.zip && \
+ unzip tao.zip -d /app && \
+ rm tao.zip
 
+EXPOSE 80
 CMD ["/run.sh"]
