@@ -1,6 +1,7 @@
 FROM tutum/lamp:latest
 
-RUN yum install -y wget
+RUN  apt-get update \
+  && apt-get install -y wget
 
 RUN rm -fr /app 
 RUN mkdir /app 
